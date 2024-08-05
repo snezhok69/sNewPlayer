@@ -1,4 +1,7 @@
 name: sNewPlayer
 version: '${project.version}'
 main: org.snezhok69.sNewplayer
-api-version: '1.16'
+api-version: '1.13'
+author: snezhok69_
+commands:
+  pvp: {}

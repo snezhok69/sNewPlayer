@@ -22,10 +22,10 @@ public class StartPluginCheckingNewVersion {
             CompletableFuture.runAsync(() -> {
                 try {
                     URL url = new URL("https://gitlab.com/snezh0k69/sRandomRTP/-/raw/main/VERSION");
-                    Variables.connection = (HttpURLConnection) url.openConnection();
-                    Variables.connection.setConnectTimeout(10000);
-                    Variables.connection.setRequestMethod("GET");
-                    int responseCode = Variables.connection.getResponseCode();
+                    Variables.connectionVersion = (HttpURLConnection) url.openConnection();
+                    Variables.connectionVersion.setConnectTimeout(10000);
+                    Variables.connectionVersion.setRequestMethod("GET");
+                    int responseCode = Variables.connectionVersion.getResponseCode();
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
                         String latestVersion = reader.readLine();

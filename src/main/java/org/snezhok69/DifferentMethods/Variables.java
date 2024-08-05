@@ -5,6 +5,7 @@ import com.tcoded.folialib.wrapper.task.WrappedTask;
 import org.snezhok69.Main;
 
 import java.net.HttpURLConnection;
+import java.sql.Connection;
 import java.util.regex.Pattern;
 
 public class Variables {
@@ -26,6 +27,7 @@ public class Variables {
         return foliaLib;
     }
     //
-    public static HttpURLConnection connection = null;
+    public static HttpURLConnection connectionVersion = null;
+    public static Connection connection;
     public static boolean isReloaded = false;
 }
