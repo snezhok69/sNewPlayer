@@ -1,0 +1,4 @@
+name: sNewPlayer
+version: '${project.version}'
+main: org.snezhok69.sNewplayer
+api-version: '1.16'
