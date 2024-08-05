@@ -1,0 +1,13 @@
+messages:
+  newplayerserver:
+    - 'privet'
+  Plugin-Enabled-Message:
+    - ''
+    - '&a[sRandomRTP] &6- &aПлагин включен! &b%mc% &aмс'
+    - '&a[sRandomRTP] &6- &aВерсия сервера: &b%server-version%'
+    - '&a[sRandomRTP] &6- &aВерсия Java: &b%java-version-server% &8| &aХост: &b%os-version%'
+    - ''
+  Plugin-Disabled-Message:
+    - ''
+    - '&a[sRandomRTP] &6- &cПлагин отключен! %mc% мс'
+    - ''

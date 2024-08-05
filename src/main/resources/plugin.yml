@@ -1,6 +1,6 @@
 name: sNewPlayer
-version: '${project.version}'
-main: org.snezhok69.sNewplayer
+version: 1.0
+main: org.snezhok69.Main
 api-version: '1.13'
 author: snezhok69_
 commands:

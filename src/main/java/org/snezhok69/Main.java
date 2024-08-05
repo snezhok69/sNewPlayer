@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.snezhok69.Commands.CommandArgs;
+//import org.snezhok69.Commands.CommandArgs;
 import org.snezhok69.Commands.onTabCompletes;
 import org.snezhok69.DataBase.DatabaseManager;
 import org.snezhok69.DifferentMethods.LoggerUtility;
@@ -33,6 +33,7 @@ public class Main extends JavaPlugin {
             Variables.instance = this;
             Variables.foliaLib = new FoliaLib(this);
             long startTime = System.currentTimeMillis();
+            //Metrics netrics = new Metrics(this, 21603);
             Bukkit.getConsoleSender().sendMessage("");
             Bukkit.getConsoleSender().sendMessage(Variables.pluginName + " §8- §c>==========================================<");
             Bukkit.getConsoleSender().sendMessage("");
@@ -54,24 +55,8 @@ public class Main extends JavaPlugin {
                 // }
                 //
                 Bukkit.getConsoleSender().sendMessage(Variables.pluginName + " §8- §eChecking installed PlaceHolderAPI...");
-                if (CheckingInstalledPlaceHolderAPI.checkingInstalledPlaceHolderAPI()) {
-                }
-                //
-                Bukkit.getConsoleSender().sendMessage(Variables.pluginName + " §8- §eLoading database...");
-                // Настройка подключения к базе данных SQLite
-                String url = "jdbc:sqlite:" + getDataFolder() + "/playerdata.db";
-
-                try {
-                    Variables.connection = DriverManager.getConnection(url);
-                    getLogger().info("Подключение к базе данных установлено.");
-                    // Создание таблицы, если ее нет
-                    new DatabaseManager(Variables.connection).createTable();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    getLogger().severe("Не удалось подключиться к базе данных.");
-                }
-
-                //
+                //if (CheckingInstalledPlaceHolderAPI.checkingInstalledPlaceHolderAPI()) {
+                //}
                 Bukkit.getConsoleSender().sendMessage(Variables.pluginName + " §8- §eLoading events...");
                 getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
                 //
@@ -127,7 +112,7 @@ public class Main extends JavaPlugin {
                 Map<String, Map<String, Object>> commands = getDescription().getCommands();
                 if (commands != null) {
                     for (String commandName : commands.keySet()) {
-                        getCommand(commandName).setExecutor(new CommandArgs());
+                        //getCommand(commandName).setExecutor(new CommandArgs());
                         getCommand(commandName).setTabCompleter(new onTabCompletes());
                     }
                 }
@@ -136,29 +121,21 @@ public class Main extends JavaPlugin {
                 IsOutdatedByMultipleVersionsTask.isOutdatedByMultipleVersionsTask();
                 AutoCheckingVersion.autoCheckingVersion();
                 //
-                Bukkit.getConsoleSender().sendMessage(Variables.pluginName + " §8- §eSending anonymous statistics...");
+                Bukkit.getConsoleSender().sendMessage(Variables.pluginName + " §8- §eLoading database...");
+                // Настройка подключения к базе данных SQLite
+                String url = "jdbc:sqlite:" + getDataFolder() + "/playerdata.db";
+
                 try {
-                    Metrics metrics = new Metrics(this, 21603);
-                    metrics.addCustomChart(new Metrics.DrilldownPie("lang", () -> {
-                        Map<String, Map<String, Integer>> map = new HashMap<>();
-                        String language = Variables.getInstance().getConfig().getString("Language");
-
-                        if (language != null && !language.trim().isEmpty()) {
-                            // Извлекаем основной язык из формата ru_ru
-                            String[] parts = language.split("_");
-                            String mainLanguage = parts[0];
-
-                            Map<String, Integer> entry = new HashMap<>();
-                            entry.put(mainLanguage, 1);
-                            map.put(mainLanguage, entry);
-                        }
-                        return map;
-                    }));
-                } catch (Throwable e) {
-                    StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-                    String callingClassName = stackTrace[2].getClassName();
-                    LoggerUtility.loggerUtility(callingClassName, e);
+                    Variables.connection = DriverManager.getConnection(url);
+                    getLogger().info("Подключение к базе данных установлено.");
+                    // Создание таблицы, если ее нет
+                    new DatabaseManager(Variables.connection).createTable();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    getLogger().severe("Не удалось подключиться к базе данных.");
                 }
+                //
+                Bukkit.getConsoleSender().sendMessage(Variables.pluginName + " §8- §eSending anonymous statistics...");
                 //
                 for (String line : LoadMessages.PluginEnabledMessage) {
                     String serverVersions = Bukkit.getServer().getVersion();
